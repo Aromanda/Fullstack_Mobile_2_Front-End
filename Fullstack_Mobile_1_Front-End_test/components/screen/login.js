@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvo
 import { UserContext } from '../shared/usercontexts'
 
 const Login = ({ navigation }) => {
-//   const [email, setEmail] = useState('erica.ger@gmail.com');
-  const [email, setEmail] = useState('arturo@nienow-auer.test'); // juste customer
+  const [email, setEmail] = useState('erica.ger@gmail.com');
+  // const [email, setEmail] = useState('arturo@nienow-auer.test'); // juste customer
 //   const [email, setEmail] = useState('kimiko.wyman@yost.test'); // juste courier
   const [password, setPassword] = useState('password');
   const { setUser } = useContext(UserContext);
