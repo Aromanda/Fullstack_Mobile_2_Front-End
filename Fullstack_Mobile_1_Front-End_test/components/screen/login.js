@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, KeyboardAvo
 import { UserContext } from '../shared/usercontexts'
 
 const Login = ({ navigation }) => {
-  // const [email, setEmail] = useState('erica.ger@gmail.com');
-  const [email, setEmail] = useState('erica.ger@customer.com'); // juste customer
+  const [email, setEmail] = useState('erica.ger@gmail.com');
+  // const [email, setEmail] = useState('erica.ger@customer.com'); // juste customer
   // const [email, setEmail] = useState('erica.ger@courier.com'); // juste courier
   const [password, setPassword] = useState('password');
   const { setUser } = useContext(UserContext);
@@ -29,8 +29,14 @@ const Login = ({ navigation }) => {
             customer_id: data.customer_id,
             courier_id: data.courier_id,
             usertype_id: data.customer_id && data.courier_id ? "" : data.customer_id ? data.customer_id : data.courier_id
-          }); // Save the user data to context
-          navigation.navigate('Restaurants'); // Navigate to RestaurantsMenu screen
+          }); 
+          if (data.customer_id && data.courier_id) {
+            navigation.navigate('AccountSelection'); // Navigate to AccountSelection
+          } else if (data.customer_id) {
+            navigation.navigate('Restaurants'); // Navigate to RestaurantsMenu screen
+          } else {
+            navigation.navigate('CourierScreen'); // Navigate to CourierScreen
+          }
         } else {
           Alert.alert('Login Failed!', 'Please check your credentials and try again.');
         }
