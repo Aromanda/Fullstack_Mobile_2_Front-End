@@ -8,10 +8,16 @@ const AccountSelection = ({ navigation }) => {
 
   const handleAccountSelection = (accountType) => {
     if (accountType === 'customer') {
-      // Redirect to restaurants for customers
+        setUser({
+        type: "customer",
+        usertype_id: user.customer_id
+      }); 
       navigation.navigate('Restaurants');
     } else if (accountType === 'courier') {
-      // Redirect to courier deliveries for couriers
+      setUser({
+        type: "courier",
+        usertype_id: user.courier_id
+      });
       navigation.navigate('Deliveries');
     }
   };

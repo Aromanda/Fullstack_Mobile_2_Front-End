@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomNavbar from '../../components/shared/header';
 import FooterNavbar from '../../components/shared/footer';
 import { useUserContext } from '../../components/shared/usercontexts';
+import { restaurants } from '../../components/screen/restaurants';
 
 const OrderHistory = () => {
     const { user } = useUserContext();
@@ -16,16 +17,14 @@ const OrderHistory = () => {
         const fetchData = async () => {
             try {
                 console.log("=========================");
-                const resRestaurants = await fetch(`${process.env.EXPO_PUBLIC_NGROK_URL}/api/restaurants`);
-                const restaurants = await resRestaurants.json();
-                console.log(user.type);
-                console.log(user.usertype_id);
+                // const resRestaurants = await fetch(`${process.env.EXPO_PUBLIC_NGROK_URL}/api/restaurants`);
+                // const restaurants = await resRestaurants.json();
+                console.log("user type:", user.type);
+                console.log("user id:", user.usertype_id);  
                 const resOrders = await fetch(`${process.env.EXPO_PUBLIC_NGROK_URL}/api/orders?type=${user.type}&id=${user.usertype_id}`);
-                console.log(resOrders);
-                console.log("=========================");
                 const orderData = await resOrders.json();
-                console.log(orderData);
                 console.log("orderData");
+                console.log(orderData);
                 const ordersWithNames = orderData.map((order) => {
                     const restaurant = restaurants.find((r) => r.id === order.restaurant_id);
                     return {
