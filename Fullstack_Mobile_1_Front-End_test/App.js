@@ -7,6 +7,7 @@ import Restaurants from './components/screen/restaurants';
 import RestaurantsMenus from './components/screen/restaurantsmenus';
 import OrderHistory from './components/screen/orderhistory';
 import AccountSelection from './components/screen/accountselections';
+import Deliveries from './components/screen/deliveries';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Importez le composant d'icônes
 
 Icon.loadFont(); // Charge les icônes
@@ -23,6 +24,7 @@ const App = () => {
           <Stack.Screen name="RestaurantsMenus" component={RestaurantsMenus} />
           <Stack.Screen name="OrderHistory" component={OrderHistory} />
           <Stack.Screen name="AccountSelection" component={AccountSelection} />
+          <Stack.Screen name="Deliveries" component={Deliveries} />
         </Stack.Navigator>
       </NavigationContainer>
     </UserProvider>

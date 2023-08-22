@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { useUserContext, UserContext } from '../shared/usercontexts';
 
 const AccountSelection = ({ navigation }) => {
+  const { user } = useUserContext();
+  const { setUser } = useContext(UserContext);
+
   const handleAccountSelection = (accountType) => {
-    navigation.navigate(accountType === 'customer' ? 'Restaurants' : 'CourierScreen');
+    if (accountType === 'customer') {
+      // Redirect to restaurants for customers
+      navigation.navigate('Restaurants');
+    } else if (accountType === 'courier') {
+      // Redirect to courier deliveries for couriers
+      navigation.navigate('Deliveries');
+    }
   };
 
   return (
@@ -26,7 +35,6 @@ const AccountSelection = ({ navigation }) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
