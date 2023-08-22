@@ -1,7 +1,8 @@
-// Account.js
 import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useUserContext } from '../../components/shared/usercontexts';
+import CustomNavbar from '../../components/shared/header';
+import FooterNavbar from '../../components/shared/footer';
 
 const Account = () => {
   const { user, setUser } = useUserContext();
@@ -19,6 +20,8 @@ const Account = () => {
 
   return (
     <View style={styles.container}>
+        <CustomNavbar />
+        <View style={styles.content}>
       <Text>User Email: {user.email}</Text>
       <Text>User Type Email: {userTypeEmail}</Text>
       <Text>User Type Phone: {userTypePhone}</Text>
@@ -38,14 +41,20 @@ const Account = () => {
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
     </View>
+    <FooterNavbar />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#F8F8F8',
+    },
+    content: {
+        flex: 1,
+        padding: 15,
+    },
   input: {
     borderWidth: 1,
     borderColor: 'gray',
