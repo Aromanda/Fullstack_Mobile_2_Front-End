@@ -17,8 +17,8 @@ const OrderHistory = () => {
         const fetchData = async () => {
             try {
                 console.log("=========================");
-                // const resRestaurants = await fetch(`${process.env.EXPO_PUBLIC_NGROK_URL}/api/restaurants`);
-                // const restaurants = await resRestaurants.json();
+                const resRestaurants = await fetch(`${process.env.EXPO_PUBLIC_NGROK_URL}/api/restaurants`);
+                const restaurants = await resRestaurants.json();
                 console.log("user type:", user.type);
                 console.log("user id:", user.usertype_id);  
                 const resOrders = await fetch(`${process.env.EXPO_PUBLIC_NGROK_URL}/api/orders?type=${user.type}&id=${user.usertype_id}`);
