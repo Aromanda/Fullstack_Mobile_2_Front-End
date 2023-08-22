@@ -18,6 +18,12 @@ const FooterNavbar = ({ onOrderHistoryPress }) => {
         <FontAwesome5 name="history" size={20} color="#000" />
         <Text style={styles.iconText}>Order History</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.iconContainer}
+        onPress={() => navigation.navigate('Account')}>
+        <FontAwesome5 name="user" size={20} color="#000" />
+        <Text style={styles.iconText}>Account</Text>
+      </TouchableOpacity>
     </View>
   );
 };
