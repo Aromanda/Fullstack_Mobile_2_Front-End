@@ -142,11 +142,6 @@ const Deliveries = () => {
                     ))}
                     <View style={styles.orderTotalSeparator} />
                     <Text style={styles.totalCost}>Total: ${selectedDelivery.total_cost}</Text>
-                    <View style={styles.modalInfoSection}>
-  <Text style={styles.modalDetails}>Order ID: {selectedDelivery.id}</Text>
-  <Text style={styles.modalDetails}>Delivery Address: {selectedDelivery.customer_address}</Text>
-  <Text style={styles.modalDetails}>Status: {selectedDelivery.status}</Text>
-</View>
                   </View>
                 </View>
               </View>
