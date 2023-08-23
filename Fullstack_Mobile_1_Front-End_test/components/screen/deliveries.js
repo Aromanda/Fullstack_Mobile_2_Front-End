@@ -124,7 +124,7 @@ const Deliveries = () => {
                     setSelectedDelivery(item);
                     setModalVisible(true); // Afficher le modal quand le bouton est cliqué
                     }}>
-                    <Text>View</Text>
+                    <Icon name="search-plus" size={20} color="#000" />
                 </TouchableOpacity>
                 </View>
                 </TouchableOpacity>
