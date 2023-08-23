@@ -83,22 +83,33 @@ const Deliveries = () => {
         ) : (
           <>
             <FlatList
-            data={deliveries}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-                <TouchableOpacity
-                style={styles.deliveryContainer}
-                onPress={() => {
-                    setSelectedDelivery(item);
-                    setModalVisible(true);
-                }}>
-                <Text style={styles.orderId}>Order ID: {item.id}</Text>
-                <Text>Delivery Address: {item.customer_address}</Text>
-                <Text>Status: {item.status}</Text>
-                <Text>View</Text>
-                </TouchableOpacity>
-            )}
-            />
+  data={deliveries}
+  keyExtractor={(item, index) => index.toString()}
+  renderItem={({ item }) => (
+    <TouchableOpacity
+      style={styles.deliveryContainer}
+      onPress={() => {
+        setSelectedDelivery(item);
+        setModalVisible(true);
+      }}>
+      <View style={styles.columnContainer}>
+        <Text style={styles.columnHeader}>Order ID</Text>
+        <Text style={styles.columnData}>{item.id}</Text>
+      </View>
+      <View style={styles.columnContainer}>
+        <Text style={styles.columnHeader}>Address</Text>
+        <Text style={styles.columnData}>{item.customer_address}</Text>
+      </View>
+      <View style={styles.columnContainer}>
+        <Text style={styles.columnHeader}>Status</Text>
+        <Text style={styles.columnData}>{item.status}</Text>
+      </View>
+      <View style={styles.columnContainer}>
+        <Text style={styles.viewButton}>View</Text>
+      </View>
+    </TouchableOpacity>
+  )}
+/>
             {modalVisible && selectedDelivery && (
               <Modal
               animationType="slide"
@@ -131,6 +142,11 @@ const Deliveries = () => {
                     ))}
                     <View style={styles.orderTotalSeparator} />
                     <Text style={styles.totalCost}>Total: ${selectedDelivery.total_cost}</Text>
+                    <View style={styles.modalInfoSection}>
+  <Text style={styles.modalDetails}>Order ID: {selectedDelivery.id}</Text>
+  <Text style={styles.modalDetails}>Delivery Address: {selectedDelivery.customer_address}</Text>
+  <Text style={styles.modalDetails}>Status: {selectedDelivery.status}</Text>
+</View>
                   </View>
                 </View>
               </View>
@@ -165,6 +181,24 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         borderBottomWidth: 1,
         borderBottomColor: '#E0E0E0',
+      },
+      columnContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      columnHeader: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5,
+      },
+      columnData: {
+        fontSize: 16,
+      },
+      viewButton: {
+        fontSize: 16,
+        color: 'blue',
+        textDecorationLine: 'underline',
       },
       restaurantName: {
         fontSize: 18,
