@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomNavbar from '../../components/shared/header';
 import FooterNavbar from '../../components/shared/footer';
 import { useUserContext } from '../../components/shared/usercontexts';
-import { restaurants } from '../../components/screen/restaurants'; // You might not need this import
 
 const Deliveries = () => {
   const { user } = useUserContext();
@@ -34,8 +33,18 @@ const Deliveries = () => {
     fetchDeliveries();
   }, []);
 
-  const handleStatusUpdate = async (delivery, newStatus) => {
+  const handleStatusUpdate = async (delivery) => {
     try {
+      let newStatus = '';
+  
+      if (delivery.status === 'PENDING') {
+        newStatus = 'IN_PROGRESS';
+      } else if (delivery.status === 'IN_PROGRESS') {
+        newStatus = 'DELIVERED';
+      } else {
+        return; // No further status change needed if it's already 'DELIVERED'
+      }
+  
       const response = await fetch(
         `${process.env.EXPO_PUBLIC_NGROK_URL}/api/order/${delivery.id}/status`,
         {
@@ -46,7 +55,7 @@ const Deliveries = () => {
           body: JSON.stringify({ status: newStatus }),
         }
       );
-
+  
       if (response.ok) {
         const updatedDeliveries = deliveries.map((d) =>
           d.id === delivery.id ? { ...d, status: newStatus } : d
@@ -83,33 +92,44 @@ const Deliveries = () => {
         ) : (
           <>
             <FlatList
-  data={deliveries}
-  keyExtractor={(item, index) => index.toString()}
-  renderItem={({ item }) => (
-    <TouchableOpacity
-      style={styles.deliveryContainer}
-      onPress={() => {
-        setSelectedDelivery(item);
-        setModalVisible(true);
-      }}>
-      <View style={styles.columnContainer}>
-        <Text style={styles.columnHeader}>Order ID</Text>
-        <Text style={styles.columnData}>{item.id}</Text>
-      </View>
-      <View style={styles.columnContainer}>
-        <Text style={styles.columnHeader}>Address</Text>
-        <Text style={styles.columnData}>{item.customer_address}</Text>
-      </View>
-      <View style={styles.columnContainer}>
-        <Text style={styles.columnHeader}>Status</Text>
-        <Text style={styles.columnData}>{item.status}</Text>
-      </View>
-      <View style={styles.columnContainer}>
-        <Text style={styles.viewButton}>View</Text>
-      </View>
-    </TouchableOpacity>
-  )}
-/>
+              data={deliveries}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={styles.deliveryContainer}
+                  onPress={() => setSelectedDelivery(item)}>
+                  <View style={styles.columnContainer}>
+                    <Text style={styles.columnHeader}>Order ID</Text>
+                    <Text style={styles.columnData}>{item.id}</Text>
+                  </View>
+                  <View style={styles.columnContainer}>
+                    <Text style={styles.columnHeader}>Address</Text>
+                    <Text style={styles.columnData}>{item.customer_address}</Text>
+                  </View>
+                  <View style={styles.columnContainer}>
+                    <Text style={styles.columnHeader}>Status</Text>
+                    <TouchableOpacity
+                      style={[
+                        styles.statusButton,
+                        { backgroundColor: getStatusColor(item.status) },
+                      ]}
+                      onPress={() => handleStatusUpdate(item)}>
+                      <Text style={styles.statusButtonText}>{item.status}</Text>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.columnContainer}>
+                <TouchableOpacity
+                    style={styles.viewButton}
+                    onPress={() => {
+                    setSelectedDelivery(item);
+                    setModalVisible(true); // Afficher le modal quand le bouton est cliqué
+                    }}>
+                    <Text>View</Text>
+                </TouchableOpacity>
+                </View>
+                </TouchableOpacity>
+              )}
+            />
             {modalVisible && selectedDelivery && (
               <Modal
               animationType="slide"
@@ -259,6 +279,17 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'right',
     },
+    statusButton: {
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        borderRadius: 5,
+        alignItems: 'center',
+      },
+      statusButtonText: {
+        color: 'white',
+        fontSize: 14,
+        fontWeight: 'bold',
+      },
   // Add more styles as needed
 });
 
