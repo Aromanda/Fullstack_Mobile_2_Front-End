@@ -83,20 +83,21 @@ const Deliveries = () => {
         ) : (
           <>
             <FlatList
-              data={deliveries}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
+            data={deliveries}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
                 <TouchableOpacity
-                  style={styles.deliveryContainer}
-                  onPress={() => {
+                style={styles.deliveryContainer}
+                onPress={() => {
                     setSelectedDelivery(item);
                     setModalVisible(true);
-                  }}>
-                  <Text style={styles.restaurantName}>{item.restaurant_name}</Text>
-                  <Text>Status: {item.status}</Text>
-                  {/* Other delivery details */}
+                }}>
+                <Text style={styles.orderId}>Order ID: {item.id}</Text>
+                <Text>Delivery Address: {item.customer_address}</Text>
+                <Text>Status: {item.status}</Text>
+                <Text>View</Text>
                 </TouchableOpacity>
-              )}
+            )}
             />
             {modalVisible && selectedDelivery && (
               <Modal
