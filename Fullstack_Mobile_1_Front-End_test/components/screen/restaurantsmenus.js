@@ -190,7 +190,6 @@ const RestaurantsMenus = ({ route }) => {
           />
         )}
       </View>
-      <FooterNavbar />
     </View>
   );  
 };  
