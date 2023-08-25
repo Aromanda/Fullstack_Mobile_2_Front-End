@@ -1,24 +1,25 @@
 import React, { useContext } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useUserContext, UserContext } from '../shared/usercontexts';
 
-const AccountSelection = ({ navigation }) => {
-  const { user } = useUserContext();
-  const { setUser } = useContext(UserContext);
+const AccountSelection = () => {
+  const navigation = useNavigation();
+  const { user, setUser } = useContext(UserContext);
 
   const handleAccountSelection = (accountType) => {
     if (accountType === 'customer') {
-        setUser({
+      setUser({
         type: "customer",
         usertype_id: user.customer_id
       }); 
-      navigation.navigate('Restaurants');
+      navigation.navigate('Restaurants', { userType: 'customer' });
     } else if (accountType === 'courier') {
       setUser({
         type: "courier",
         usertype_id: user.courier_id
       });
-      navigation.navigate('Deliveries');
+      navigation.navigate('Deliveries', { userType: 'courier' });
     }
   };
 

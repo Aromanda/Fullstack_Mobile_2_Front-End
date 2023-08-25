@@ -41,7 +41,6 @@ const Account = () => {
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
     </View>
-    <FooterNavbar />
     </View>
   );
 };

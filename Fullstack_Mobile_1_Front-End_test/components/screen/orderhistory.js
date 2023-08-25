@@ -103,7 +103,6 @@ const OrderHistory = () => {
                 </>
             )}
             </View>
-            <FooterNavbar />
         </View>
     );
 };

@@ -170,7 +170,6 @@ const Deliveries = () => {
           </>
         )}
       </View>
-      <FooterNavbar />
     </View>
   );
 };

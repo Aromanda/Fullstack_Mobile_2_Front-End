@@ -114,7 +114,6 @@ const Restaurants = () => {
                 numColumns={2}
                 contentContainerStyle={{ padding: 10 }}
             />
-            <FooterNavbar />
         </View>
     );
     };
