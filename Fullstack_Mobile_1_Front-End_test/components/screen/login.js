@@ -5,12 +5,13 @@ import { useRoute } from '@react-navigation/native';
 
 const Login = ({ navigation }) => {
   // const [email, setEmail] = useState('erica.ger@gmail.com');
-  const [email, setEmail] = useState('erica.ger@customer.com'); // juste customer
-  // const [email, setEmail] = useState('erica.ger@courier.com'); // juste courier
+  // const [email, setEmail] = useState('erica.ger@customer.com'); // juste customer
+  const [email, setEmail] = useState('erica.ger@courier.com'); // juste courier
   const [password, setPassword] = useState('password');
   const { setUser } = useContext(UserContext);
   const route = useRoute();
-  const {setIsUserType} = route.params;
+  const { setIsUserType } = route.params;
+
   const handleLogin = () => {
     console.log("email", email, "password", password);
     fetch(`${process.env.EXPO_PUBLIC_NGROK_URL}/api/login`, {
@@ -36,10 +37,10 @@ const Login = ({ navigation }) => {
             navigation.navigate('AccountSelection'); // Navigate to AccountSelection
           } else if (data.customer_id) {
             setIsUserType("customer");
-            navigation.navigate('Restaurants'); // Navigate to RestaurantsMenu screen
+            navigation.navigate('Restaurants', { userType: 'customer', isUserType: 'customer' }); // Navigate to RestaurantsMenu screen
           } else {
             setIsUserType("courier");
-            navigation.navigate('Deliveries'); // Navigate to Deliveries
+            navigation.navigate('Deliveries', { userType: 'courier', isUserType: 'courier' }); // Navigate to Deliveries
           }
         } else {
           Alert.alert('Login Failed!', 'Please check your credentials and try again.');

@@ -23,7 +23,7 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={Login} initialParams={{setIsUserType}} />
-          <Stack.Screen name="Restaurants" component={Restaurants} />
+          <Stack.Screen name="Restaurants" component={Restaurants} initialParams={{ isUserType }} />
           <Stack.Screen name="RestaurantsMenus" component={RestaurantsMenus} />
           <Stack.Screen name="OrderHistory" component={OrderHistory} initialParams={{ isUserType }} />
           <Stack.Screen name="AccountSelection" component={AccountSelection} />

@@ -13,13 +13,13 @@ const AccountSelection = () => {
         type: "customer",
         usertype_id: user.customer_id
       }); 
-      navigation.navigate('Restaurants', { userType: 'customer' });
+      navigation.navigate('Restaurants', { userType: 'customer', isUserType: accountType });
     } else if (accountType === 'courier') {
       setUser({
         type: "courier",
         usertype_id: user.courier_id
       });
-      navigation.navigate('Deliveries', { userType: 'courier' });
+      navigation.navigate('Deliveries', { userType: 'courier', isUserType: accountType });
     }
   };
 
