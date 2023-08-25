@@ -30,29 +30,27 @@ const Account = () => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch(`${process.env.EXPO_PUBLIC_NGROK_URL}/api/account/${user.id}`, {
+      const response = await fetch(`${process.env.EXPO_PUBLIC_NGROK_URL}/api/account/${user.usertype_id}?type=${user.type}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user_type_email: userTypeEmail,
-          user_type_phone: userTypePhone,
+          account_email: userTypeEmail, // Utilisez "account_email" au lieu de "user_type_email"
+          account_phone: userTypePhone, // Utilisez "account_phone" au lieu de "user_type_phone"
         }),
       });
+  
       const result = await response.json();
-      if (result.success) {
-        // Update the user context with the new values
-        setUser(prevUser => ({
-          ...prevUser,
-          user_type_email: userTypeEmail,
-          user_type_phone: userTypePhone,
-        }));
+      if (response.ok) {
+        // Mise à jour réussie
+        console.log(result.message);
+        // Vous pouvez ajouter d'autres actions ici en fonction de votre flux
       } else {
-        console.error('Error updating account info');
+        console.error('Erreur lors de la mise à jour des informations du compte');
       }
     } catch (error) {
-      console.error('Error updating account info:', error);
+      console.error('Erreur lors de la mise à jour des informations du compte:', error);
     }
   };
 
